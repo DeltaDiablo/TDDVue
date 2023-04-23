@@ -36,7 +36,6 @@
       "node": true,
       "jest": true
     },
-
     "extends": [
       "plugin:vue/vue3-essential",
       "eslint:recommended"
@@ -45,7 +44,7 @@
       "parser": "@babel/eslint-parser",
       "requireConfigFile": false,
       "ecmaVersion": 2018,
-  "sourceType": "module"
+      "sourceType": "module"
     },
     "rules": {}
   },

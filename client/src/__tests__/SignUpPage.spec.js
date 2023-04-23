@@ -2,7 +2,11 @@ import signuppage from './../pages/SignUpPage.vue';
 import {render,screen} from '@testing-library/vue';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import axios from 'axios';
+//uncomment to use Axios
+//import axios from 'axios';
+//uncomment to use msw package
+//import {setupServer } from 'msw/node'
+//import { rest } from 'msw'
 
 describe('Sign Up Page Actions',()=>{
   describe('Load Events',()=>{
@@ -83,7 +87,14 @@ describe('Sign Up Page Actions',()=>{
   });
   describe('API integration and functions', ()=>{
     it('Submit username and email to backend', async ()=>{
-    
+  /*  let reqbody;
+      const svr = setupServer(
+        rest.post('/api/1.0/users',(req, res, ctx)=>{
+          reqbody = req.arrayBuffer();
+          return res(ctx.status(200));
+        })
+      );
+        svr.listen();*/
       render(signuppage);
       const uid = screen.queryByLabelText("User Name:");
       const eml = screen.queryByLabelText("Email Address:");
@@ -96,14 +107,17 @@ describe('Sign Up Page Actions',()=>{
       const btn = screen.queryByRole("button",{name:"Submit"});
       //using axios to mock
       const mf = jest.fn();
-      axios.post = mf;
+      //axios.post = mf;
+      // using fetch with whatwg installed on vue component
+      window.fetch = mf;
       //wait for userbuttnon to be avail able for click event
      await userEvent.click(btn);
      //declare the calls from axios
      const fc = mf.mock.calls[0]
      //get the second parameter from the axios call function
-     const body = fc[1];
+     const body = JSON.parse(fc[1].body);
     //result
+   // await svr.close();
       expect(body).toEqual({
         username:"usertestline91",
         email:"usertestline92@email.com",

@@ -56,3 +56,20 @@ Setting up jest and testing Library
 installing Axios into the client
 1. run this command
 	npm install axios
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+setting up the back end
+
+* you have two options to run the back end, memory mode or stored mode
+**memory mode loads the back-end into memory and runs from there
+**stored mode runs the server on your computer and installs the data on your computer
+****if you want to use the data elsewhere for another project stored mode may be an option,
+****if you want to just use it with this project only i recommend you run this backend in memory mode
+
+1. navigate to the backend folder
+2. type npm install to install all the dependencies
+3(memory mode) type npm run start-mem
+3(stored mode) type run start-stored
+
+
