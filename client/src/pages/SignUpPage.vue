@@ -12,7 +12,7 @@
         <input class="NewUser" id="secondarypassword" type="password" v-model="pw2"/><br>
         <button :disabled="btn" @click.prevent="submit()">Submit</button>
     </form>
-    <p>{{ username }}<br>{{ email }}</p>
+    <p>{{ username }}<br>{{ email }}<br>{{ totusers }}</p>
     </div>
 </template>
 
@@ -22,26 +22,32 @@ export default {
     name:'SignUpPage',
     data(){
         return{
+            id:0,
             password:'',
             pw2:'',
             username:'',
             email:'',
+            totusers:10,
+            image:''
+
 
         };
     },
     methods:{
         submit(){
-           
-          //axios.post("/api/1.0/users",{username:this.username,email:this.email,password:this.password})
-          //using internal fetch props in vue
           const reqBody = {username:this.username,email:this.email,password:this.password};
-          fetch("/api/1.0/users",{method:"POST", body: JSON.stringify(reqBody),headers: {"Content-Type":"application/json"}})
-        }
+          fetch("/api/1.0/users/",{method:"POST", body: JSON.stringify(reqBody),headers: {"Content-Type":"application/json"}});
+        }, 
     },
     computed:{
         btn()
         {
             return this.password && this.pw2? this.password!=this.pw2:true;
+        },
+        usercnt(){
+            const uc = 10;
+            uc+1;
+            return uc;
         }
     }
 }
